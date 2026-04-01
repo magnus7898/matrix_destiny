@@ -50,6 +50,11 @@
     .pythagoras {
       background: linear-gradient(135deg, #f59e0b, #ef4444);
     }
+
+    /* ✅ NEW BOX STYLE */
+    .name {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+    }
   </style>
 </head>
 <body>
@@ -66,17 +71,25 @@
     პითაგორას კვადრატი
   </div>
 
+  <!-- ✅ Button 3 -->
+  <div class="box name" onclick="openName()">
+    სახელის ნუმეროლოგია
+  </div>
+
 </div>
 
 <script>
   function openMatrix() {
     window.location.href = "matrix.html";
-
   }
 
   function openPythagoras() {
-    // change this later when you create second page
     window.location.href = "pythagoras.html";
+  }
+
+  // ✅ NEW FUNCTION
+  function openName() {
+    window.location.href = "name.html";
   }
 </script>
 
