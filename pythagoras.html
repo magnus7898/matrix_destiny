@@ -22,10 +22,6 @@ h2 {
   margin-bottom:20px;
 }
 
-.input-box {
-  margin-bottom:15px;
-}
-
 input {
   padding:10px;
   font-size:18px;
@@ -37,20 +33,19 @@ input {
 
 button {
   padding:10px 20px;
-  font-size:16px;
   margin-left:10px;
   border:none;
   border-radius:10px;
-  cursor:pointer;
   background:#7c3aed;
   color:white;
+  cursor:pointer;
 }
 
 #calc {
   margin:15px 0;
   text-align:center;
+  font-size:18px;
   line-height:1.6;
-  opacity:0.9;
 }
 
 /* grid */
@@ -83,15 +78,23 @@ button {
 
 <h2>პითაგორას კვადრატი</h2>
 
-<div class="input-box">
-  <input type="text" id="birth" placeholder="DD.MM.YYYY">
-  <button onclick="calculate()">გამოთვლა</button>
-</div>
+<input type="text" id="birth" placeholder="DD/MM/YYYY" maxlength="10">
+<button onclick="calculate()">გამოთვლა</button>
 
 <div id="calc"></div>
 <div class="grid" id="grid"></div>
 
 <script>
+// 🔹 auto format DD/MM/YYYY
+document.getElementById("birth").addEventListener("input", function(e) {
+  let value = e.target.value.replace(/\D/g, "");
+
+  if (value.length > 2) value = value.slice(0,2) + "/" + value.slice(2);
+  if (value.length > 5) value = value.slice(0,5) + "/" + value.slice(5,9);
+
+  e.target.value = value;
+});
+
 function sumDigits(n) {
   return Math.abs(n)
     .toString()
@@ -100,44 +103,35 @@ function sumDigits(n) {
 }
 
 function calculate() {
-  const value = document.getElementById("birth").value.trim();
+  const value = document.getElementById("birth").value;
 
-  // validate format
-  if (!/^\d{2}\.\d{2}\.\d{4}$/.test(value)) {
-    alert("შეიყვანე თარიღი ფორმატით: DD.MM.YYYY");
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+    alert("შეიყვანე თარიღი ფორმატით: DD/MM/YYYY");
     return;
   }
 
-  const [day, month, year] = value.split(".");
+  const [day, month, year] = value.split("/");
 
   const base = day + month + year;
   let digits = base.split("").map(Number);
 
-  // --- STEP 1 ---
+  // --- calculations ---
   const sum1 = digits.reduce((a,b)=>a+b,0);
-
-  // --- STEP 2 ---
   const sum2 = sumDigits(sum1);
 
-  // --- STEP 3 (first NON-ZERO digit) ---
   const firstDigit = digits.find(d => d !== 0);
-
-  let sum3 = sum1 - (firstDigit * 2);
-  sum3 = Math.abs(sum3);
-
-  // --- STEP 4 ---
+  let sum3 = Math.abs(sum1 - (firstDigit * 2));
   const sum4 = sumDigits(sum3);
 
-  // combine digits
   const extra = ("" + sum1 + sum2 + sum3 + sum4)
     .split("")
     .map(Number);
 
   digits = digits.concat(extra);
 
-  // show calculation
+  // ✅ ONLY show these
   document.getElementById("calc").innerHTML =
-    `${value} → ${sum1} → ${sum2} → ${sum3} → ${sum4}`;
+    `"ჯამი": ${sum1}<br>"მისია": ${sum2}`;
 
   // count digits
   const count = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
