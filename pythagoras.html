@@ -1,97 +1,39 @@
-<!DOCTYPE html>
-<html lang="ka">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>პითაგორას კვადრატი</title>
-
-<style>
-body {
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background: radial-gradient(circle, #0f172a, #020617);
-  font-family:sans-serif;
-  color:white;
-}
-
-h1 {
-  margin-bottom:20px;
-}
-
-/* input */
-.input-box {
-  margin-bottom:30px;
-}
-
-input {
-  padding:10px;
-  font-size:18px;
-  border-radius:10px;
-  border:none;
-  text-align:center;
-  width:200px;
-}
-
-button {
-  padding:10px 20px;
-  font-size:16px;
-  margin-left:10px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  background:#7c3aed;
-  color:white;
-}
-
-/* grid */
-.grid {
-  display:grid;
-  grid-template-columns: repeat(3, 100px);
-  gap:10px;
-}
-
-.cell {
-  width:100px;
-  height:100px;
-  background:#111827;
-  border-radius:12px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-}
-
-.num {
-  font-size:14px;
-  opacity:0.6;
-}
-</style>
-</head>
-
-<body>
-
-<h1>პითაგორას კვადრატი</h1>
-
-<div class="input-box">
-  <input type="date" id="birth">
-  <button onclick="calculate()">გამოთვლა</button>
-</div>
-
-<div class="grid" id="grid">
-  <!-- cells will be filled -->
-</div>
-
 <script>
 function calculate() {
   const value = document.getElementById("birth").value;
   if (!value) return;
 
-  const digits = value.replaceAll("-", "").split("").map(Number);
+  const parts = value.split("-");
+  const year = parts[0];
+  const month = parts[1];
+  const day = parts[2];
+
+  // DD MM YYYY format digits
+  let digits = (day + month + year).split("").map(Number);
+
+  // --- CALCULATION METHOD ---
+
+  // sum of all digits
+  let sum1 = digits.reduce((a,b) => a + b, 0);
+
+  // reduce to single digit
+  let sum2 = sum1.toString().split("").reduce((a,b) => a + Number(b), 0);
+
+  // first digit of day
+  let firstDigit = Number(day[0]);
+
+  // third number
+  let sum3 = sum1 - (firstDigit * 2);
+
+  // fourth number
+  let sum4 = sum3.toString().split("").reduce((a,b) => a + Number(b), 0);
+
+  // add all new numbers digits
+  digits = digits
+    .concat(sum1.toString().split("").map(Number))
+    .concat(sum2.toString().split("").map(Number))
+    .concat(sum3.toString().split("").map(Number))
+    .concat(sum4.toString().split("").map(Number));
 
   // count digits 1-9
   const count = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
@@ -107,6 +49,18 @@ function render(count) {
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
 
+  const labels = {
+    1: "პერსონალურობა",
+    2: "ენერგია",
+    3: "ინტერესები",
+    4: "ჯანმრთელობა",
+    5: "ლოგიკა",
+    6: "მუშაობა",
+    7: "იღბალი",
+    8: "პასუხისმგებლობა",
+    9: "მეხსიერება"
+  };
+
   const order = [
     1,4,7,
     2,5,8,
@@ -121,7 +75,7 @@ function render(count) {
     for (let i=0;i<count[n];i++) text += n;
 
     div.innerHTML = `
-      <div class="num">${n}</div>
+      <div class="num">${labels[n]}</div>
       <div>${text || "-"}</div>
     `;
 
@@ -129,6 +83,3 @@ function render(count) {
   });
 }
 </script>
-
-</body>
-</html>
