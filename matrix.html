@@ -10,9 +10,9 @@
 
     body {
       min-height: 100vh;
-      background: radial-gradient(ellipse at 20% 20%, #001a2e 0%, #002233 40%, #001018 100%);
+      background: #0a0618;
       font-family: 'Noto Sans Georgian', sans-serif;
-      color: #2a2010;
+      color: #e0d8ff;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,44 +22,9 @@
     }
 
     /* Starfield */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 40% 8%,  rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 55% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 70% 12%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 85% 45%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 92% 22%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 5%  60%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 18% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 33% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 78% 82%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 48% 55%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 88% 68%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(2px 2px at 15% 50%, rgba(200,180,255,0.4) 0%, transparent 100%),
-        radial-gradient(2px 2px at 65% 25%, rgba(180,220,255,0.3) 0%, transparent 100%),
-        radial-gradient(2px 2px at 45% 80%, rgba(255,200,180,0.3) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
+    body::before { display:none; }
 
-    /* Glow orbs */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(600px 400px at 15% 30%, rgba(255,240,150,0.25) 0%, transparent 70%),
-        radial-gradient(500px 500px at 85% 70%, rgba(180,160,80,0.20) 0%, transparent 70%),
-        radial-gradient(400px 300px at 50% 85%, rgba(120,110,60,0.15) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+    body::after { display:none; }
 
     .page-title {
       font-family: 'Cinzel', serif;
@@ -81,7 +46,7 @@
     .page-subtitle {
       font-size: 13px;
       letter-spacing: 3px;
-      color: rgba(60,50,20,0.7);
+      color: rgba(180,170,255,0.8);
       text-align: center;
       margin-bottom: 36px;
       position: relative;
@@ -134,7 +99,7 @@
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(60,50,20,0.7);
+      color: rgba(180,170,255,0.8);
     }
     .input-panel input {
       width: 58px;
@@ -144,7 +109,7 @@
       border-radius: 8px;
       font-size: 18px;
       text-align: center;
-      color: #2a2010;
+      color: #e0d8ff;
       font-family: 'Cinzel', serif;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
@@ -228,8 +193,8 @@
       position: relative;
       border-radius: 50%;
       padding: 20px;
-      background: radial-gradient(circle at 50% 50%, rgba(0,60,100,0.08) 0%, transparent 70%);
-      border: 1px solid rgba(167,139,250,0.12);
+      background: transparent;
+      border: none;
       box-shadow:
         0 0 60px rgba(0,80,140,0.15),
         0 0 120px rgba(0,100,140,0.08),
@@ -584,7 +549,7 @@ function draw(v) {
   }
 
   // SVG background
-  el('rect',{x:-120,y:-120,width:1440,height:1440,fill:'#001520',rx:0});
+  // page background used
 
   // Subtle glow behind center
   const defs = el('defs',{});
@@ -598,37 +563,28 @@ function draw(v) {
   el('circle',{cx,cy,r:outerR+40,fill:'url(#centerGlow)'});
 
   // Outer big circle
-  el('circle',{cx,cy,r:outerR,fill:'none',stroke:'rgba(167,139,250,0.3)','stroke-width':'1'});
+  el('circle',{cx,cy,r:outerR,fill:'none',stroke:'rgba(180,160,255,0.95)','stroke-width':'2'});
 
   // Rectangle: left side through L1 center, top through T1, bottom through B1, right through R3
   // Square: all 4 sides pass through 1st circles (d1) — L1, T1, B1, R1
-  el('rect',{x:cx-d1, y:cy-d1, width:d1*2, height:d1*2, fill:'none',stroke:'rgba(167,139,250,0.45)','stroke-width':'1.2'});
+  el('rect',{x:cx-d1, y:cy-d1, width:d1*2, height:d1*2, fill:'none',stroke:'rgba(220,200,255,0.95)','stroke-width':'1.2'});
 
-  // Rhombus 98%
-  const rhD = Math.round(d3 * 0.98);
-  el('polygon',{points:`${cx},${cy-rhD} ${cx+rhD},${cy} ${cx},${cy+rhD} ${cx-rhD},${cy}`,fill:'none',stroke:'rgba(96,208,255,0.35)','stroke-width':'1'});
 
-  // Small rhombuses
-  const rh=(x,y,r)=>`${x},${y-r} ${x+r},${y} ${x},${y+r} ${x-r},${y}`;
-  ['rgba(167,139,250,0.4)'].forEach(c=>{
-    el('polygon',{points:rh(cx,cy-d3,r3_r),fill:'none',stroke:c,'stroke-width':'0.7'});
-    el('polygon',{points:rh(cx,cy+d3,r3_r),fill:'none',stroke:c,'stroke-width':'0.7'});
-    el('polygon',{points:rh(cx-d3,cy,r3_r),fill:'none',stroke:c,'stroke-width':'0.7'});
-    el('polygon',{points:rh(cx+d3,cy,r3_r),fill:'none',stroke:c,'stroke-width':'0.7'});
-  });
+
+
 
   // Lines
-  const lc = 'rgba(200,180,255,0.25)';
+  const lc = 'rgba(220,200,255,0.8)';
   el('line',{x1:cx,y1:cy+d1,x2:cx+d1,y2:cy,stroke:lc,'stroke-width':'0.8'});
   el('line',{x1:cx-(d3+r3_r),y1:cy,x2:cx+(d3+r3_r),y2:cy,stroke:lc,'stroke-width':'0.8'});
   el('line',{x1:cx,y1:cy-(d3+r3_r),x2:cx,y2:cy+(d3+r3_r),stroke:lc,'stroke-width':'0.8'});
 
   // Red line: TR1 -> BL1 (full diagonal), label on left side of TR1->center half, rotated -45°
-  el('line',{x1:cx+dd1,y1:cy-dd1,x2:cx-dd1,y2:cy+dd1,stroke:'rgba(255,100,100,0.6)','stroke-width':'1.5'});
+  el('line',{x1:cx+dd1,y1:cy-dd1,x2:cx-dd1,y2:cy+dd1,stroke:'rgba(255,120,120,1.0)','stroke-width':'1.5'});
   el('text',{x:670,y:493,'font-size':13,'font-weight':600,fill:'rgba(255,130,130,0.95)','font-family':'Noto Sans Georgian,sans-serif','text-anchor':'middle',transform:'rotate(-45,670,493)'},'ქალის ხაზი');
 
   // Purple line: TL1 -> BR1 (full diagonal), label on right side of TL1->center half, rotated 45°
-  el('line',{x1:cx-dd1,y1:cy-dd1,x2:cx+dd1,y2:cy+dd1,stroke:'rgba(180,80,220,0.7)','stroke-width':'1.5'});
+  el('line',{x1:cx-dd1,y1:cy-dd1,x2:cx+dd1,y2:cy+dd1,stroke:'rgba(210,110,255,1.0)','stroke-width':'1.5'});
   el('text',{x:529,y:493,'font-size':13,'font-weight':600,fill:'rgba(200,130,255,0.95)','font-family':'Noto Sans Georgian,sans-serif','text-anchor':'middle',transform:'rotate(45,529,493)'},'მამაკაცის ხაზი');
 
   // CENTER
@@ -645,7 +601,7 @@ function draw(v) {
 
   // BOTTOM
   circle(cx,cy+d1,r1_r,'#EF9F27','#BA7517',1,v.B1v,true);
-  circle(cx,cy+d2,r2_r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,v.B2v,false);
+  circle(cx,cy+d2,r2_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.B2v,false);
   circle(cx,cy+d3,r3_r,'#E24B4A','#A32D2D',1,v.B3v,true);
 
   // LEFT
@@ -655,15 +611,17 @@ function draw(v) {
 
   // RIGHT
   circle(cx+d1,cy,r1_r,'#EF9F27','#BA7517',1,v.R1v,true);
-  circle(cx+d2,cy,r2_r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,v.R2v,false);
+  circle(cx+d2,cy,r2_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.R2v,false);
   circle(cx+d3,cy,r3_r,'#E24B4A','#A32D2D',1,v.R3v,true);
 
   // RC1 RC2
-  circle(cx+rc_r+r2_r,cy,r2_r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,v.RC1v,false);
-  circle(cx+rc_r+r2_r*2+r1_r,cy,r1_r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,v.RC2v,false);
+  circle(cx+rc_r+r2_r,cy,r2_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.RC1v,false);
+  circle(cx+rc_r+r2_r*2+r1_r,cy,r1_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.RC2v,false);
 
   // Diagonals
-  const dc=(x,y,r,lbl)=>circle(x,y,r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,lbl,false);
+  const dc=(x,y,r,lbl)=>circle(x,y,r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,lbl,false);
+  // Purple rhombus — drawn before diagonal circles so circles cover the line crossings
+  el('polygon',{points:`${cx},${cy-2*dd1} ${cx+2*dd1},${cy} ${cx},${cy+2*dd1} ${cx-2*dd1},${cy}`,fill:'none',stroke:'rgba(127,119,221,0.95)','stroke-width':'1.5'});
   dc(cx-dd1,cy-dd1,r1_r,v.TL1v); dc(cx-dd2,cy-dd2,r2_r,v.TL2v); dc(cx-dd3,cy-dd3,r3_r,v.TL3v);
   dc(cx+dd1,cy-dd1,r1_r,v.TR1v); dc(cx+dd2,cy-dd2,r2_r,v.TR2v); dc(cx+dd3,cy-dd3,r3_r,v.TR3v);
   dc(cx-dd1,cy+dd1,r1_r,v.BL1v); dc(cx-dd2,cy+dd2,r2_r,v.BL2v); dc(cx-dd3,cy+dd3,r3_r,v.BL3v);
@@ -675,9 +633,9 @@ function draw(v) {
   const W2x=Math.round(B1x+0.5*(R1x-B1x)),  W2y=Math.round(B1y+0.5*(R1y-B1y));
   const W3x=Math.round(B1x+0.75*(R1x-B1x)), W3y=Math.round(B1y+0.75*(R1y-B1y));
 
-  circle(W1x,W1y,r1_r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,v.W1v,false);
-  circle(W2x,W2y,r1_r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,v.W2v,false);
-  circle(W3x,W3y,r1_r,'rgba(30,20,50,0.8)','rgba(200,180,255,0.5)',1.5,v.W3v,false);
+  circle(W1x,W1y,r1_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.W1v,false);
+  circle(W2x,W2y,r1_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.W2v,false);
+  circle(W3x,W3y,r1_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.W3v,false);
 
   icon(W1x, W1y - r1_r - 14, 'heart');
   icon(W3x, W3y - r1_r - 14, 'dollar');
