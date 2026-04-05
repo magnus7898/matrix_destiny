@@ -171,7 +171,7 @@
     .side-table thead th {
       background: rgba(0,100,140,0.9);
       color: #7ff0ff;
-      padding: 14px 20px;
+      padding: 10px 6px;
       text-align: center;
       font-weight: 700;
       font-size: 15px;
@@ -179,7 +179,7 @@
       border-bottom: 1px solid rgba(0,200,230,0.3);
     }
     .side-table td {
-      padding: 10px 20px;
+      padding: 8px 6px;
       text-align: center;
       border-bottom: 1px solid rgba(255,255,255,0.05);
       color: rgba(200,235,255,0.85);
@@ -257,6 +257,22 @@
     .ep-circ.ep-gold { border-color:rgba(255,215,0,0.8); background:rgba(45,30,5,0.95); }
     .ep-circ.ep-big { width:68px; height:68px; font-size:24px; }
     .ep-label { position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:9px; color:rgba(160,140,220,0.7); white-space:nowrap; font-family:sans-serif; font-weight:400; }
+
+    .method-btn {
+      padding: 9px 22px;
+      background: rgba(20,12,50,0.9);
+      border: 1px solid rgba(140,110,255,0.4);
+      border-radius: 8px;
+      color: rgba(180,160,255,0.8);
+      font-size: 13px;
+      font-family: 'Noto Sans Georgian', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .method-btn:hover { border-color: rgba(167,139,250,0.8); color: white; }
+    .method-btn.active { background: rgba(100,60,200,0.7); border-color: rgba(167,139,250,0.9); color: white; font-weight: 600; }
+
     .footer-text {
       margin-top: 48px;
       font-size: 11px;
@@ -312,12 +328,35 @@
     .ep-circ.ep-gold { border-color:rgba(255,215,0,0.8); background:rgba(45,30,5,0.95); }
     .ep-circ.ep-big { width:68px; height:68px; font-size:24px; }
     .ep-label { position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:9px; color:rgba(160,140,220,0.7); white-space:nowrap; font-family:sans-serif; font-weight:400; }
+
+    .method-btn {
+      padding: 9px 22px;
+      background: rgba(20,12,50,0.9);
+      border: 1px solid rgba(140,110,255,0.4);
+      border-radius: 8px;
+      color: rgba(180,160,255,0.8);
+      font-size: 13px;
+      font-family: 'Noto Sans Georgian', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .method-btn:hover { border-color: rgba(167,139,250,0.8); color: white; }
+    .method-btn.active { background: rgba(100,60,200,0.7); border-color: rgba(167,139,250,0.9); color: white; font-weight: 600; }
+
     .footer-text { font-size: 9px; letter-spacing: 1px; margin-top: 24px; }
     }
   </style>
 </head>
 <body>
 
+
+<!-- Method selector -->
+<div style="display:flex;gap:10px;margin-bottom:20px;justify-content:center;flex-wrap:wrap;" id="method-bar">
+  <button class="method-btn active" id="btn-m1" onclick="setMethod(1)">მეთოდი 1</button>
+  <button class="method-btn" id="btn-m2" onclick="setMethod(2)">მეთოდი 2</button>
+  <button class="method-btn" id="btn-m3" onclick="setMethod(3)">მეთოდი 3</button>
+</div>
 <h1 class="page-title">✦ ნუმეროლოგიური მატრიცა ✦</h1>
 <p class="page-subtitle">სულის რუქა · სამყაროს კოდი</p>
 
@@ -327,6 +366,35 @@
   <div class="divider-line" style="background:linear-gradient(90deg,rgba(167,139,250,0.6),rgba(96,208,255,0.6),transparent)"></div>
   <div class="divider-gem" style="background:#60d0ff;box-shadow:0 0 10px #60d0ff"></div>
   <div class="divider-line" style="background:linear-gradient(90deg,rgba(96,208,255,0.6),transparent)"></div>
+</div>
+
+
+<div id="m3-inputs" style="display:none;width:100%;max-width:600px;margin-bottom:16px;">
+  <div style="background:rgba(18,10,45,0.9);border:1px solid rgba(140,110,255,0.35);border-radius:12px;padding:16px 20px;">
+    <div style="font-size:12px;color:rgba(160,140,220,0.8);margin-bottom:12px;letter-spacing:1px;">
+      გვარი, სახელი, მამის სახელი, დედის გვარი — ქართული ასოების ნუმეროლოგიური მნიშვნელობა
+      <br><span style="opacity:0.6;font-size:11px;">მაგ: გიორგის ასული, დავითის ძე, დედის გვარი</span>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div class="input-group">
+        <label>გვარი</label>
+        <input id="m3-gvari" placeholder="გვარი" style="width:120px;font-family:'Noto Sans Georgian',sans-serif;font-size:13px;" oninput="m3Update()"/>
+      </div>
+      <div class="input-group">
+        <label>სახელი</label>
+        <input id="m3-saxeli" placeholder="სახელი" style="width:120px;font-family:'Noto Sans Georgian',sans-serif;font-size:13px;" oninput="m3Update()"/>
+      </div>
+      <div class="input-group">
+        <label>მამის სახელი</label>
+        <input id="m3-mamis" placeholder="მამის სახელი" style="width:130px;font-family:'Noto Sans Georgian',sans-serif;font-size:13px;" oninput="m3Update()"/>
+      </div>
+      <div class="input-group">
+        <label>დედის გვარი</label>
+        <input id="m3-dedis" placeholder="დედის გვარი" style="width:130px;font-family:'Noto Sans Georgian',sans-serif;font-size:13px;" oninput="m3Update()"/>
+      </div>
+    </div>
+    <div id="m3-preview" style="margin-top:10px;font-size:12px;color:rgba(160,140,220,0.7);display:flex;gap:16px;flex-wrap:wrap;"></div>
+  </div>
 </div>
 
 <div class="input-panel">
@@ -366,7 +434,7 @@
     <div style="display:flex;gap:14px;flex-wrap:wrap;">
       <div class="ep-box" style="flex:2;min-width:200px;"><div class="ep-title">სულის ძიება</div><div class="ep-row"><div style="display:flex;flex-direction:column;gap:12px;"><div class="ep-circ" id="ep-soul-top"><span class="ep-label">R3+L3</span></div><div class="ep-circ" id="ep-soul-bot"><span class="ep-label">T3+B3</span></div></div><div class="ep-circ ep-gold ep-big" id="ep-soul-mid"><span class="ep-label">ჯამი</span></div></div></div>
       <div class="ep-box" style="flex:2;min-width:200px;"><div class="ep-title">სოციალიზაცია</div><div class="ep-row"><div style="display:flex;flex-direction:column;gap:12px;"><div class="ep-circ" id="ep-soc-top"><span class="ep-label">TL3+BR3</span></div><div class="ep-circ" id="ep-soc-bot"><span class="ep-label">TR3+BL3</span></div></div><div class="ep-circ ep-gold ep-big" id="ep-soc-mid"><span class="ep-label">ჯამი</span></div></div></div>
-      <div class="ep-box" style="flex:1;min-width:130px;justify-content:center;align-items:center;"><div class="ep-title">მისია</div><div class="ep-circ ep-gold ep-big" id="ep-misia"><span class="ep-label">ჯამი</span></div></div>
+      <div class="ep-box" style="flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><div class="ep-title">მისია</div><div class="ep-circ ep-gold ep-big" id="ep-misia"><span class="ep-label">ჯამი</span></div></div>
     </div>
   </div>
 
@@ -400,7 +468,7 @@
 </div>
 
     <div class="side-table-wrapper">
-    <table class="side-table" id="side-table">
+    <table class="side-table" id="side-table"><colgroup><col style="width:80px"><col style="width:60px"><col></colgroup>
       <thead>
         <tr>
           <th>ასაკი</th>
@@ -422,6 +490,43 @@
 function reduce22(n) {
   while (n > 22) n = String(n).split('').reduce((a,d)=>a+parseInt(d),0);
   return n;
+}
+
+
+// Georgian letter numerology (traditional cycle 1-9)
+const GEO_NUMS = {
+  'ა':1,'ბ':2,'გ':3,'დ':4,'ე':5,'ვ':6,'ზ':7,'ჱ':8,'თ':9,
+  'ი':1,'კ':2,'ლ':3,'მ':4,'ნ':5,'ჲ':6,'ო':7,'პ':8,'ჟ':9,
+  'რ':1,'ს':2,'ტ':3,'უ':4,'ფ':5,'ქ':6,'ღ':7,'ყ':8,'შ':9,
+  'ჩ':1,'ც':2,'ძ':3,'წ':4,'ჭ':5,'ხ':6,'ჯ':7,'ჰ':8
+};
+function geoNumerology(str) {
+  if (!str) return 0;
+  let sum = [...str.toLowerCase()].reduce((a,c) => a + (GEO_NUMS[c]||0), 0);
+  return reduce22(sum);
+}
+function m3Update() {
+  const gvari  = geoNumerology(document.getElementById('m3-gvari').value);
+  const saxeli = geoNumerology(document.getElementById('m3-saxeli').value);
+  const mamis  = geoNumerology(document.getElementById('m3-mamis').value);
+  const dedis  = geoNumerology(document.getElementById('m3-dedis').value);
+  const prev   = document.getElementById('m3-preview');
+  if (prev) {
+    prev.innerHTML = [
+      ['გვარი (TL3)', gvari, '#7F77DD'],
+      ['სახელი (TR3)', saxeli, '#7F77DD'],
+      ['მამის სახელი (BR3)', mamis, '#7F77DD'],
+      ['დედის გვარი (BL3)', dedis, '#7F77DD'],
+    ].map(([l,v,c]) => `<span style="color:${c};font-weight:700;">${l}: <b>${v||'-'}</b></span>`).join('  ·  ');
+  }
+}
+
+let currentMethod = 1;
+function setMethod(m) {
+  currentMethod = m;
+  document.querySelectorAll('.method-btn').forEach((b,i) => b.classList.toggle('active', i+1===m));
+  document.getElementById('m3-inputs').style.display = m===3 ? 'block' : 'none';
+  if (m===3) m3Update();
 }
 
 function calculate() {
@@ -467,8 +572,48 @@ function calculate() {
   const W1v = reduce22(B1v + W2v);
   const W3v = reduce22(R1v + W2v);
 
-  draw({L3v,T3v,R3v,B3v,Cv,B1v,B2v,R1v,R2v,L1v,L2v,T1v,T2v,G1v,G2v,
-        TL3v,TR3v,BR3v,BL3v,RC1v,RC2v,TL1v,TL2v,TR1v,TR2v,BR1v,BR2v,BL1v,BL2v,W1v,W2v,W3v});
+  // Method overrides
+  let drawVars = {L3v,T3v,R3v,B3v,Cv,B1v,B2v,R1v,R2v,L1v,L2v,T1v,T2v,G1v,G2v,
+    TL3v,TR3v,BR3v,BL3v,RC1v,RC2v,TL1v,TL2v,TR1v,TR2v,BR1v,BR2v,BL1v,BL2v,W1v,W2v,W3v,
+    RC1vShow:true, M3cv2:0};
+
+  if (currentMethod === 2) {
+    // Method 2: no RC1/RC2, TL1/TR1/BL1/BR1 = Cv + corner3
+    drawVars.TL1v = reduce22(Cv + TL3v);
+    drawVars.TR1v = reduce22(TR3v + Cv);
+    drawVars.BL1v = reduce22(BL3v + Cv);
+    drawVars.BR1v = reduce22(BR3v + Cv);
+    // TL2/TR2/BL2/BR2 recalculate from new 1s
+    drawVars.TL2v = reduce22(drawVars.TL1v + TL3v);
+    drawVars.TR2v = reduce22(drawVars.TR1v + TR3v);
+    drawVars.BL2v = reduce22(drawVars.BL1v + BL3v);
+    drawVars.BR2v = reduce22(drawVars.BR1v + BR3v);
+    drawVars.RC1vShow = false;
+  }
+
+  if (currentMethod === 3) {
+    // Method 3: override TL3/TR3/BR3/BL3 with name numerology
+    const g3_TL3 = geoNumerology(document.getElementById('m3-gvari').value)  || TL3v;
+    const g3_TR3 = geoNumerology(document.getElementById('m3-saxeli').value) || TR3v;
+    const g3_BR3 = geoNumerology(document.getElementById('m3-mamis').value)  || BR3v;
+    const g3_BL3 = geoNumerology(document.getElementById('m3-dedis').value)  || BL3v;
+    // Second center circle = sum of all four
+    const Cv2 = reduce22(g3_TL3 + g3_TR3 + g3_BR3 + g3_BL3);
+    drawVars.TL3v = g3_TL3; drawVars.TR3v = g3_TR3;
+    drawVars.BR3v = g3_BR3; drawVars.BL3v = g3_BL3;
+    drawVars.M3cv2 = Cv2;
+    // Recalculate 1s and 2s using Cv2
+    drawVars.TL1v = reduce22(Cv2 + g3_TL3);
+    drawVars.TR1v = reduce22(g3_TR3 + Cv2);
+    drawVars.BL1v = reduce22(g3_BL3 + Cv2);
+    drawVars.BR1v = reduce22(g3_BR3 + Cv2);
+    drawVars.TL2v = reduce22(drawVars.TL1v + g3_TL3);
+    drawVars.TR2v = reduce22(drawVars.TR1v + g3_TR3);
+    drawVars.BL2v = reduce22(drawVars.BL1v + g3_BL3);
+    drawVars.BR2v = reduce22(drawVars.BR1v + g3_BR3);
+  }
+
+  draw(drawVars);
 
   // ── Extra panels ──────────────────────────────────────
   document.getElementById('extra-panels').style.display = 'block';
@@ -570,7 +715,7 @@ function draw(v) {
   svg.innerHTML = '';
 
   const cx=600, cy=600;
-  const rc_r=50, r1_r=20, r2_r=32, r3_r=52, gap=180;
+  const rc_r=60, r1_r=25, r2_r=40, r3_r=64, gap=180;
   const d1=rc_r+gap+r1_r, d2=d1+r1_r+r2_r, d3=d2+r2_r+r3_r;
   const f=Math.sqrt(2)/2;
   const dd1=Math.round((rc_r+gap+r1_r)*f);
@@ -590,7 +735,7 @@ function draw(v) {
     el('circle',{cx:cx2,cy:cy2,r,fill,stroke,'stroke-width':sw||1});
     if (label !== undefined) {
       const textFill = (fill === '#FFD700') ? '#1a0a00' : 'white';
-      const fs = Math.max(16, Math.round(r * 1.1));
+      const fs = Math.max(20, Math.round(r * 1.3));
       el('text',{x:cx2,y:cy2,'font-size':fs,'font-weight':700,fill:textFill,'font-family':'Cinzel,serif'}, label);
     }
   }
@@ -649,8 +794,18 @@ function draw(v) {
   el('line',{x1:cx-dd1,y1:cy-dd1,x2:cx+dd1,y2:cy+dd1,stroke:'rgba(210,110,255,1.0)','stroke-width':'1.5'});
   el('text',{x:529,y:493,'font-size':13,'font-weight':600,fill:'rgba(200,130,255,0.95)','font-family':'Noto Sans Georgian,sans-serif','text-anchor':'middle',transform:'rotate(45,529,493)'},'მამაკაცის ხაზი');
 
+  // Square and rhombus behind all circles
+  // Purple rhombus - drawn before circles
+  el('polygon',{points:`${cx},${cy-2*dd1} ${cx+2*dd1},${cy} ${cx},${cy+2*dd1} ${cx-2*dd1},${cy}`,fill:'none',stroke:'rgba(127,119,221,0.95)','stroke-width':'1.5'});
+
   // CENTER
   circle(cx,cy,rc_r,'#FFD700','#BA7517',1.5,v.Cv,true);
+
+
+  // Method 3: second center circle below main center
+  if (v.M3cv2) {
+    circle(cx, cy+rc_r*2+10, rc_r, '#9966CC', '#6633AA', 1.5, v.M3cv2, true);
+  }
 
   // Green
   circle(cx-rc_r-gap/2,cy,r1_r,'#639922','#3B6D11',1,v.G1v,true);
@@ -677,13 +832,13 @@ function draw(v) {
   circle(cx+d3,cy,r3_r,'#E24B4A','#A32D2D',1,v.R3v,true);
 
   // RC1 RC2
-  circle(cx+rc_r+r2_r,cy,r2_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.RC1v,false);
-  circle(cx+rc_r+r2_r*2+r1_r,cy,r1_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.RC2v,false);
+  if (v.RC1vShow !== false) {
+    circle(cx+rc_r+r2_r,cy,r2_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.RC1v,false);
+    circle(cx+rc_r+r2_r*2+r1_r,cy,r1_r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,v.RC2v,false);
+  }
 
   // Diagonals
   const dc=(x,y,r,lbl)=>circle(x,y,r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,lbl,false);
-  // Purple rhombus - drawn before circles
-  el('polygon',{points:`${cx},${cy-2*dd1} ${cx+2*dd1},${cy} ${cx},${cy+2*dd1} ${cx-2*dd1},${cy}`,fill:'none',stroke:'rgba(127,119,221,0.95)','stroke-width':'1.5'});
   dc(cx-dd1,cy-dd1,r1_r,v.TL1v); dc(cx-dd2,cy-dd2,r2_r,v.TL2v); dc(cx-dd3,cy-dd3,r3_r,v.TL3v);
   dc(cx+dd1,cy-dd1,r1_r,v.TR1v); dc(cx+dd2,cy-dd2,r2_r,v.TR2v); dc(cx+dd3,cy-dd3,r3_r,v.TR3v);
   dc(cx-dd1,cy+dd1,r1_r,v.BL1v); dc(cx-dd2,cy+dd2,r2_r,v.BL2v); dc(cx-dd3,cy+dd3,r3_r,v.BL3v);
