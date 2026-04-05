@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Frequency Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        text-align: center;
+        padding: 40px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: auto;
+        background: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    button {
+        margin: 5px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #00c6ff;
+        color: black;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #0072ff;
+        color: white;
+    }
+
+    input, select {
+        margin: 10px;
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+        width: 80%;
+    }
+
+    .controls {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>🎵 Frequency Generator</h1>
+
+<div class="container">
+
+    <h3>Preset Frequencies</h3>
+    <div>
+        <button onclick="setFreq(174)">174</button>
+        <button onclick="setFreq(258)">258</button>
+        <button onclick="setFreq(396)">396</button>
+        <button onclick="setFreq(417)">417</button>
+        <button onclick="setFreq(528)">528</button>
+        <button onclick="setFreq(693)">693</button>
+        <button onclick="setFreq(714)">714</button>
+        <button onclick="setFreq(852)">852</button>
+        <button onclick="setFreq(963)">963</button>
+        <button onclick="setFreq(432)">432</button>
+    </div>
+
+    <div class="controls">
+        <h3>Manual Control</h3>
+
+        <label>Frequency (Hz)</label><br>
+        <input type="number" id="freqInput" value="432" min="1" max="2000"><br>
+
+        <label>Wave Type</label><br>
+        <select id="waveType">
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="sawtooth">Sawtooth</option>
+        </select><br>
+
+        <label>Volume</label><br>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.2"><br>
+
+        <button onclick="startTone()">▶ Start</button>
+        <button onclick="stopTone()">⏹ Stop</button>
+    </div>
+
+</div>
+
+<script>
+let audioCtx;
+let oscillator;
+let gainNode;
+
+function setFreq(freq) {
+    document.getElementById("freqInput").value = freq;
+    if (oscillator) {
+        oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    }
+}
+
+function startTone() {
+    if (audioCtx) return;
+
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    oscillator = audioCtx.createOscillator();
+    gainNode = audioCtx.createGain();
+
+    const freq = document.getElementById("freqInput").value;
+    const wave = document.getElementById("waveType").value;
+    const volume = document.getElementById("volume").value;
+
+    oscillator.type = wave;
+    oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+    gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+}
+
+function stopTone() {
+    if (!audioCtx) return;
+
+    oscillator.stop();
+    audioCtx.close();
+
+    audioCtx = null;
+}
+</script>
+
+</body>
+</html>
