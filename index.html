@@ -8,21 +8,33 @@
 <style>
 body {
   margin: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+  background: #020617;
+}
+
+/* 🌠 Canvas background */
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Content above stars */
+.wrapper {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* 🌌 Enhanced background */
-  background: radial-gradient(circle at 20% 30%, #1e293b, transparent),
-              radial-gradient(circle at 80% 70%, #0f172a, transparent),
-              linear-gradient(135deg, #020617, #0f172a);
-
-  font-family: sans-serif;
   padding: 20px;
 }
 
-/* Container */
+/* Grid */
 .container {
   display: grid;
   gap: 25px;
@@ -45,52 +57,40 @@ body {
   justify-content: center;
   text-align: center;
   padding: 20px;
-
   font-size: 20px;
   color: white;
-
   border-radius: 20px;
   cursor: pointer;
 
-  /* Glass effect */
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
   border: 1px solid rgba(255,255,255,0.15);
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
-/* ✨ subtle colored glow accents */
+/* Glow accents */
 .matrix { box-shadow: 0 10px 30px rgba(124,58,237,0.4); }
 .pythagoras { box-shadow: 0 10px 30px rgba(245,158,11,0.4); }
 .name { box-shadow: 0 10px 30px rgba(16,185,129,0.4); }
 .astro { box-shadow: 0 10px 30px rgba(236,72,153,0.4); }
 .frequency { box-shadow: 0 10px 30px rgba(34,197,94,0.4); }
 
-/* Hover (desktop) */
-@media (hover: hover) {
+@media (hover:hover) {
   .box:hover {
     transform: translateY(-10px) scale(1.03);
     background: rgba(255,255,255,0.15);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
   }
 }
 
-/* Tap (mobile) */
 .box:active {
   transform: scale(0.96);
 }
 
-/* Small screens */
 @media (max-width: 480px) {
   .box {
     height: 120px;
     font-size: 16px;
-    border-radius: 16px;
   }
 }
 </style>
@@ -98,50 +98,76 @@ body {
 
 <body>
 
-<div class="container">
-  
-  <div class="box matrix" onclick="openMatrix()">
-    ბედისწერის მატრიცა
-  </div>
+<canvas id="stars"></canvas>
 
-  <div class="box pythagoras" onclick="openPythagoras()">
-    პითაგორას კვადრატი
+<div class="wrapper">
+  <div class="container">
+    <div class="box matrix" onclick="openMatrix()">ბედისწერის მატრიცა</div>
+    <div class="box pythagoras" onclick="openPythagoras()">პითაგორას კვადრატი</div>
+    <div class="box name" onclick="openName()">სახელის ნუმეროლოგია</div>
+    <div class="box astro" onclick="openAstro()">ასტროლოგია</div>
+    <div class="box frequency" onclick="openFrequency()">სიხშირეები</div>
   </div>
-
-  <div class="box name" onclick="openName()">
-    სახელის ნუმეროლოგია
-  </div>
-
-  <div class="box astro" onclick="openAstro()">
-    ასტროლოგია
-  </div>
-
-  <div class="box frequency" onclick="openFrequency()">
-    სიხშირეები
-  </div>
-
 </div>
 
 <script>
-function openMatrix() {
-  window.location.href = "matrix.html";
+// Navigation
+function openMatrix(){ window.location.href="matrix.html"; }
+function openPythagoras(){ window.location.href="pythagoras.html"; }
+function openName(){ window.location.href="name.html"; }
+function openAstro(){ window.location.href="astro.html"; }
+function openFrequency(){ window.location.href="frequency.html"; }
+
+// 🌠 STAR FIELD
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+const STAR_COUNT = 120;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+// Create stars
+for (let i = 0; i < STAR_COUNT; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 1.5,
+    speed: Math.random() * 0.3,
+    alpha: Math.random()
+  });
 }
 
-function openPythagoras() {
-  window.location.href = "pythagoras.html";
+// Animate
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  stars.forEach(star => {
+    star.y += star.speed;
+
+    if (star.y > canvas.height) {
+      star.y = 0;
+      star.x = Math.random() * canvas.width;
+    }
+
+    // twinkle
+    star.alpha += (Math.random() - 0.5) * 0.05;
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
 }
 
-function openName() {
-  window.location.href = "name.html";
-}
-
-function openAstro() {
-  window.location.href = "astro.html";
-}
-
-function openFrequency() {
-  window.location.href = "frequency.html";
-}
+animate();
 </script>
 
 </body>
