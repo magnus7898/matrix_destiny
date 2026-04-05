@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Frequency Generator</title>
+<title>სიხსირეების გენერატორი</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -76,12 +76,12 @@
     </div>
 
     <div class="controls">
-        <h3>Manual Control</h3>
+        <h3>შეიყვანე სიხშირე</h3>
 
-        <label>Frequency (Hz)</label><br>
+        <label>სიხშირე (Hz)</label><br>
         <input type="number" id="freqInput" value="432" min="1" max="2000"><br>
 
-        <label>Wave Type</label><br>
+        <label>ტალღა Type</label><br>
         <select id="waveType">
             <option value="sine">Sine</option>
             <option value="square">Square</option>
@@ -89,7 +89,7 @@
             <option value="sawtooth">Sawtooth</option>
         </select><br>
 
-        <label>Volume</label><br>
+        <label>ხმა</label><br>
         <input type="range" id="volume" min="0" max="1" step="0.01" value="0.2"><br>
 
         <button onclick="startTone()">▶ Start</button>
