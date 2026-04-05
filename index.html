@@ -20,39 +20,47 @@ body {
 /* Container */
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  gap: 25px;
   width: 100%;
   max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* Desktop tuning */
+@media (min-width: 900px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 900px;
+  }
 }
 
 /* Cards */
 .box {
-  width: 100%;
-  height: 140px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 20px;
   color: white;
-  border-radius: 18px;
+  border-radius: 20px;
   cursor: pointer;
   text-align: center;
-  padding: 15px;
-  transition: 0.3s;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  padding: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* Hover only on desktop */
+/* Desktop hover */
 @media (hover: hover) {
   .box:hover {
-    transform: scale(1.05);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
   }
 }
 
-/* Active tap effect for mobile */
+/* Mobile tap */
 .box:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 /* Colors */
@@ -76,20 +84,12 @@ body {
   background: linear-gradient(135deg, #22c55e, #84cc16);
 }
 
-/* 📱 Small phones */
+/* Small mobile */
 @media (max-width: 480px) {
   .box {
     height: 120px;
     font-size: 16px;
-    border-radius: 15px;
-  }
-}
-
-/* 📲 Tablets */
-@media (min-width: 768px) {
-  .box {
-    height: 160px;
-    font-size: 20px;
+    border-radius: 16px;
   }
 }
 </style>
