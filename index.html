@@ -55,9 +55,13 @@
       background: linear-gradient(135deg, #10b981, #06b6d4);
     }
 
-    /* ✅ NEW ASTROLOGY STYLE */
     .astro {
       background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    }
+
+    /* ✅ NEW FREQUENCY STYLE */
+    .frequency {
+      background: linear-gradient(135deg, #22c55e, #84cc16);
     }
   </style>
 </head>
@@ -65,24 +69,25 @@
 
 <div class="container">
   
-  <!-- 1 -->
   <div class="box matrix" onclick="openMatrix()">
     ბედისწერის მატრიცა
   </div>
 
-  <!-- 2 -->
   <div class="box pythagoras" onclick="openPythagoras()">
     პითაგორას კვადრატი
   </div>
 
-  <!-- 3 -->
   <div class="box name" onclick="openName()">
     სახელის ნუმეროლოგია
   </div>
 
-  <!-- ✅ 4 NEW -->
   <div class="box astro" onclick="openAstro()">
     ასტროლოგია
+  </div>
+
+  <!-- ✅ NEW -->
+  <div class="box frequency" onclick="openFrequency()">
+    სიხშირეები
   </div>
 
 </div>
@@ -100,9 +105,13 @@
     window.location.href = "name.html";
   }
 
-  // ✅ NEW FUNCTION
   function openAstro() {
     window.location.href = "astro.html";
+  }
+
+  // ✅ NEW FUNCTION
+  function openFrequency() {
+    window.location.href = "frequency.html";
   }
 </script>
 
