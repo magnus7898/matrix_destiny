@@ -16,22 +16,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 12px 60px;
+      padding: 40px 20px 60px;
       position: relative;
       overflow-x: hidden;
     }
 
     /* Starfield */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(100,60,200,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 600px 600px at 80% 70%, rgba(80,40,180,0.15) 0%, transparent 70%),
-        radial-gradient(ellipse 500px 400px at 50% 10%, rgba(120,80,220,0.12) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background: radial-gradient(ellipse 900px 700px at 20% 30%, rgba(100,60,200,0.18) 0%, transparent 70%), radial-gradient(ellipse 700px 700px at 80% 70%, rgba(80,40,180,0.15) 0%, transparent 70%);
     }
 
     body::after { display:none; }
@@ -159,7 +152,6 @@
       gap: 32px;
       position: relative;
       z-index: 1;
-      width: 100%;
     }
 
     .side-table-wrapper {
@@ -257,7 +249,14 @@
     .row-svadhistana td{ background: rgba(239,159,39,0.85);  color: #2d1500; }
     .row-muladhara  td { background: rgba(220,70,70,0.85);   color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
 
-    .row-total td { background: rgba(80,80,80,0.7); color: #e0e0e0; font-weight: 700; font-size: 15px; }
+    .row-total td { background: rgba(90,90,90,0.75); color: #e8e8e8; font-weight: 700; font-size: 15px; }
+    .ep-box { flex:1; min-width:200px; background:rgba(18,10,45,0.9); border:1px solid rgba(140,110,255,0.35); border-radius:14px; padding:16px 20px; display:flex; flex-direction:column; gap:12px; }
+    .ep-title { font-size:13px; font-weight:700; letter-spacing:1px; color:rgba(180,160,255,0.95); text-align:center; }
+    .ep-row { display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap; }
+    .ep-circ { width:60px; height:60px; border-radius:50%; background:rgba(25,15,55,0.95); border:2px solid rgba(140,110,255,0.7); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; color:white; font-family:"Cinzel",serif; flex-shrink:0; position:relative; }
+    .ep-circ.ep-gold { border-color:rgba(255,215,0,0.8); background:rgba(45,30,5,0.95); }
+    .ep-circ.ep-big { width:68px; height:68px; font-size:24px; }
+    .ep-label { position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:9px; color:rgba(160,140,220,0.7); white-space:nowrap; font-family:sans-serif; font-weight:400; }
     .footer-text {
       margin-top: 48px;
       font-size: 11px;
@@ -269,9 +268,9 @@
     }
 
     /* ── RESPONSIVE ── */
-    .diagram-wrapper { width: 100%; max-width: min(85vh, 95vw); height: auto; }
+    .diagram-wrapper { width: 100%; max-width: min(95vh, 98vw); }
     .diagram-wrapper svg { width: 100%; height: auto; display: block; }
-    .table-wrapper, .side-table-wrapper { width: 100%; max-width: 100%; }
+    .table-wrapper, .side-table-wrapper { width: 100%; max-width: 1800px; }
 
     @media (max-width: 900px) {
       body { padding: 20px 12px 40px; }
@@ -280,7 +279,7 @@
       .divider { margin-bottom: 16px; }
       .divider-line { width: 70px; }
       .input-panel { flex-wrap: wrap; justify-content: center; gap: 10px; padding: 14px 16px; margin-bottom: 20px; }
-      .diagram-wrapper { max-width: 100%; }
+      .diagram-wrapper { max-width: 100vw !important; }
       .chakra-table th, .chakra-table td { padding: 9px 6px; font-size: 12px; }
       .chakra-table td:first-child { font-size: 11px; }
       .side-table thead th { font-size: 12px; padding: 10px 8px; }
@@ -290,7 +289,6 @@
     }
 
     @media (max-width: 600px) {
-      .diagram-wrapper { max-width: 90vw !important; }
       body { padding: 12px 0 30px; }
       .page-title { font-size: 15px; letter-spacing: 1px; }
       .page-subtitle { display: none; }
@@ -306,7 +304,14 @@
       .side-table thead th { font-size: 11px; padding: 8px 5px; }
       .side-table td { font-size: 10px; padding: 5px 6px; }
       .side-table tr.anchor-row td:nth-child(2) { font-size: 13px; }
-      .row-total td { background: rgba(80,80,80,0.7); color: #e0e0e0; font-weight: 700; font-size: 15px; }
+      .row-total td { background: rgba(90,90,90,0.75); color: #e8e8e8; font-weight: 700; font-size: 15px; }
+    .ep-box { flex:1; min-width:200px; background:rgba(18,10,45,0.9); border:1px solid rgba(140,110,255,0.35); border-radius:14px; padding:16px 20px; display:flex; flex-direction:column; gap:12px; }
+    .ep-title { font-size:13px; font-weight:700; letter-spacing:1px; color:rgba(180,160,255,0.95); text-align:center; }
+    .ep-row { display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap; }
+    .ep-circ { width:60px; height:60px; border-radius:50%; background:rgba(25,15,55,0.95); border:2px solid rgba(140,110,255,0.7); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; color:white; font-family:"Cinzel",serif; flex-shrink:0; position:relative; }
+    .ep-circ.ep-gold { border-color:rgba(255,215,0,0.8); background:rgba(45,30,5,0.95); }
+    .ep-circ.ep-big { width:68px; height:68px; font-size:24px; }
+    .ep-label { position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:9px; color:rgba(160,140,220,0.7); white-space:nowrap; font-family:sans-serif; font-weight:400; }
     .footer-text { font-size: 9px; letter-spacing: 1px; margin-top: 24px; }
     }
   </style>
@@ -352,22 +357,19 @@
     <svg id="diagram" width="1800" height="1800" viewBox="-120 -120 1440 1440" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
 
-
-
-  <div class="side-table-wrapper">
-    <table class="side-table" id="side-table">
-      <thead>
-        <tr>
-          <th>ასაკი</th>
-          <th>ენერგია</th>
-          <th>განმარტება</th>
-        </tr>
-      </thead>
-      <tbody id="side-table-body">
-        <tr><td colspan="3" style="color:rgba(150,220,255,0.5);padding:20px;text-align:center">შეიყვანეთ თარიღი</td></tr>
-      </tbody>
-    </table>
+  <!-- Extra panels -->
+  <div id="extra-panels" style="display:none;width:100%;max-width:1400px;margin-bottom:8px;">
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;">
+      <div class="ep-box"><div class="ep-title" style="color:rgba(210,130,255,0.95);">მამაკაცის ხაზი</div><div class="ep-row"><div class="ep-circ" id="ep-tl3"><span class="ep-label">TL3</span></div><div class="ep-circ" id="ep-br3"><span class="ep-label">BR3</span></div><div class="ep-circ ep-gold" id="ep-male-sum"><span class="ep-label">ჯამი</span></div></div></div>
+      <div class="ep-box"><div class="ep-title" style="color:rgba(255,140,140,0.95);">ქალის ხაზი</div><div class="ep-row"><div class="ep-circ" id="ep-tr3"><span class="ep-label">TR3</span></div><div class="ep-circ" id="ep-bl3"><span class="ep-label">BL3</span></div><div class="ep-circ ep-gold" id="ep-fem-sum"><span class="ep-label">ჯამი</span></div></div></div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <div class="ep-box" style="flex:2;min-width:200px;"><div class="ep-title">სულის ძიება</div><div class="ep-row"><div style="display:flex;flex-direction:column;gap:12px;"><div class="ep-circ" id="ep-soul-top"><span class="ep-label">R3+L3</span></div><div class="ep-circ" id="ep-soul-bot"><span class="ep-label">T3+B3</span></div></div><div class="ep-circ ep-gold ep-big" id="ep-soul-mid"><span class="ep-label">ჯამი</span></div></div></div>
+      <div class="ep-box" style="flex:2;min-width:200px;"><div class="ep-title">სოციალიზაცია</div><div class="ep-row"><div style="display:flex;flex-direction:column;gap:12px;"><div class="ep-circ" id="ep-soc-top"><span class="ep-label">TL3+BR3</span></div><div class="ep-circ" id="ep-soc-bot"><span class="ep-label">TR3+BL3</span></div></div><div class="ep-circ ep-gold ep-big" id="ep-soc-mid"><span class="ep-label">ჯამი</span></div></div></div>
+      <div class="ep-box" style="flex:1;min-width:130px;justify-content:center;align-items:center;"><div class="ep-title">მისია</div><div class="ep-circ ep-gold ep-big" id="ep-misia"><span class="ep-label">ჯამი</span></div></div>
+    </div>
   </div>
+
 
   <div class="table-wrapper">
     <table class="chakra-table" id="chakra-table">
@@ -387,101 +389,32 @@
         <tr class="row-manipura">   <td>მანიპურა (მზის წნული)</td>         <td id="c-cv">-</td><td id="c-cv2">-</td><td id="c-s5">-</td></tr>
         <tr class="row-svadhistana"><td>სვადჰისტანა (საკრალური ჩაკრა)</td><td id="c-b1">-</td><td id="c-r1">-</td><td id="c-s6">-</td></tr>
         <tr class="row-muladhara">  <td>მულადჰარა (ფუძის ჩაკრა)</td>      <td id="c-b3">-</td><td id="c-r3">-</td><td id="c-s7">-</td></tr>
+        <tr class="row-total"><td>სულ</td><td id="c-sum-e">-</td><td id="c-sum-l">-</td><td id="c-sum-s">-</td></tr>
       </tbody>
     </table>
   </div>
 
-<!-- ═══════════════════════════════════════════════════ -->
-<!-- EXTRA PANELS                                         -->
-<!-- ═══════════════════════════════════════════════════ -->
-<div id="extra-panels" style="width:100%;max-width:1800px;display:none;margin-top:24px;">
-
-  <!-- Top box: Male/Female lines -->
-  <div style="background:rgba(20,12,50,0.85);border:1px solid rgba(167,139,250,0.3);border-radius:14px;padding:20px 28px;margin-bottom:20px;">
-    <div style="display:flex;gap:40px;flex-wrap:wrap;justify-content:center;">
-
-      <!-- Male line -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-        <div style="font-size:13px;color:rgba(200,130,255,0.9);letter-spacing:1px;font-weight:600;">მამაკაცის ხაზი</div>
-        <div style="display:flex;gap:14px;align-items:center;">
-          <div class="ep-circle" id="ep-tl3" title="TL3"></div>
-          <div class="ep-circle" id="ep-br3" title="BR3"></div>
-          <div class="ep-circle ep-sum" id="ep-male-sum" title="TL3+BR3"></div>
-        </div>
-      </div>
-
-      <!-- Female line -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-        <div style="font-size:13px;color:rgba(255,130,130,0.9);letter-spacing:1px;font-weight:600;">ქალის ხაზი</div>
-        <div style="display:flex;gap:14px;align-items:center;">
-          <div class="ep-circle" id="ep-tr3" title="TR3"></div>
-          <div class="ep-circle" id="ep-bl3" title="BL3"></div>
-          <div class="ep-circle ep-sum" id="ep-fem-sum" title="TR3+BL3"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Bottom 3 boxes -->
-  <div style="display:flex;gap:16px;flex-wrap:wrap;">
-
-    <!-- Box 1: სულის ძიება -->
-    <div style="flex:1;min-width:220px;background:rgba(20,12,50,0.85);border:1px solid rgba(167,139,250,0.3);border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:12px;">
-      <div style="font-size:13px;color:rgba(180,160,255,0.9);letter-spacing:1px;font-weight:600;">სულის ძიება</div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div class="ep-circle" id="ep-soul-top" title="R3+L3"></div>
-          <div class="ep-circle" id="ep-soul-bot" title="T3+B3"></div>
-        </div>
-        <div class="ep-circle ep-sum" id="ep-soul-mid" title="sum"></div>
-      </div>
-    </div>
-
-    <!-- Box 2: სოციალიზაცია -->
-    <div style="flex:1;min-width:220px;background:rgba(20,12,50,0.85);border:1px solid rgba(167,139,250,0.3);border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:12px;">
-      <div style="font-size:13px;color:rgba(180,160,255,0.9);letter-spacing:1px;font-weight:600;">სოციალიზაცია</div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div class="ep-circle" id="ep-soc-top" title="TL3+BR3"></div>
-          <div class="ep-circle" id="ep-soc-bot" title="TR3+BL3"></div>
-        </div>
-        <div class="ep-circle ep-sum" id="ep-soc-mid" title="sum"></div>
-      </div>
-    </div>
-
-    <!-- Box 3: მისია -->
-    <div style="flex:1;min-width:160px;background:rgba(20,12,50,0.85);border:1px solid rgba(167,139,250,0.3);border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:12px;">
-      <div style="font-size:13px;color:rgba(180,160,255,0.9);letter-spacing:1px;font-weight:600;">მისია</div>
-      <div class="ep-circle ep-sum" id="ep-misia" title="sum of middles"></div>
-    </div>
-
-  </div>
-</div>
-
-<style>
-.ep-circle {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: rgba(30,20,60,0.9);
-  border: 2px solid rgba(167,139,250,0.6);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; font-weight: 700; color: white;
-  font-family: 'Cinzel', serif;
-  position: relative;
-}
-.ep-circle::after {
-  content: attr(title);
-  position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
-  font-size: 9px; color: rgba(167,139,250,0.6); white-space: nowrap;
-  font-family: sans-serif; font-weight: 400;
-}
-.ep-circle.ep-sum {
-  border-color: rgba(255,215,0,0.7);
-  background: rgba(50,35,10,0.9);
-}
-</style>
+  <!-- Age/Energy table -->
+  <div class="side-table-wrapper" id="move-side-here"></div>
 
 </div>
+
+    <div class="side-table-wrapper">
+    <table class="side-table" id="side-table">
+      <thead>
+        <tr>
+          <th>ასაკი</th>
+          <th>ენერგია</th>
+          <th>განმარტება</th>
+        </tr>
+      </thead>
+      <tbody id="side-table-body">
+        <tr><td colspan="3" style="color:rgba(150,220,255,0.5);padding:20px;text-align:center">შეიყვანეთ თარიღი</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
 
 <p class="footer-text">✦ სამყაროს რიცხვები · ენერგიის ნიმუში ✦</p>
 
@@ -489,13 +422,6 @@
 function reduce22(n) {
   while (n > 22) n = String(n).split('').reduce((a,d)=>a+parseInt(d),0);
   return n;
-}
-
-function setEp(id, val, label) {
-  const e = document.getElementById(id);
-  if (!e) return;
-  e.textContent = val;
-  if (label) e.setAttribute('title', label);
 }
 
 function calculate() {
@@ -544,53 +470,37 @@ function calculate() {
   draw({L3v,T3v,R3v,B3v,Cv,B1v,B2v,R1v,R2v,L1v,L2v,T1v,T2v,G1v,G2v,
         TL3v,TR3v,BR3v,BL3v,RC1v,RC2v,TL1v,TL2v,TR1v,TR2v,BR1v,BR2v,BL1v,BL2v,W1v,W2v,W3v});
 
-  // Show extra panels
+  // ── Extra panels ──────────────────────────────────────
   document.getElementById('extra-panels').style.display = 'block';
+  function r22(n){ return n<=22?n:r22(String(n).split('').reduce((a,d)=>a+parseInt(d),0)); }
+  function setC(id,val){ const e=document.getElementById(id); if(e)e.textContent=val; }
 
-  // Male line: TL3, BR3, sum
-  const maleSumRaw = TL3v + BR3v;
-  const maleSum = reduce22(maleSumRaw);
-  setEp('ep-tl3', TL3v);
-  setEp('ep-br3', BR3v);
-  setEp('ep-male-sum', maleSum);
+  setC('ep-tl3', TL3v); setC('ep-br3', BR3v);
+  setC('ep-male-sum', r22(TL3v+BR3v));
+  setC('ep-tr3', TR3v); setC('ep-bl3', BL3v);
+  setC('ep-fem-sum', r22(TR3v+BL3v));
 
-  // Female line: TR3, BL3, sum
-  const femSumRaw = TR3v + BL3v;
-  const femSum = reduce22(femSumRaw);
-  setEp('ep-tr3', TR3v);
-  setEp('ep-bl3', BL3v);
-  setEp('ep-fem-sum', femSum);
+  const soulTop=r22(R3v+L3v), soulBot=r22(T3v+B3v), soulMid=r22(soulTop+soulBot);
+  setC('ep-soul-top',soulTop); setC('ep-soul-bot',soulBot); setC('ep-soul-mid',soulMid);
 
-  // სულის ძიება: top=R3+L3, bot=T3+B3, mid=sum(top+bot)
-  const soulTop = reduce22(R3v + L3v);
-  const soulBot = reduce22(T3v + B3v);
-  const soulMid = reduce22(soulTop + soulBot);
-  setEp('ep-soul-top', soulTop, 'R3+L3');
-  setEp('ep-soul-bot', soulBot, 'T3+B3');
-  setEp('ep-soul-mid', soulMid, 'სულ');
+  const socTop=r22(TL3v+BR3v), socBot=r22(TR3v+BL3v), socMid=r22(socTop+socBot);
+  setC('ep-soc-top',socTop); setC('ep-soc-bot',socBot); setC('ep-soc-mid',socMid);
 
-  // სოციალიზაცია: top=TL3+BR3, bot=TR3+BL3, mid=sum
-  const socTop = reduce22(TL3v + BR3v);
-  const socBot = reduce22(TR3v + BL3v);
-  const socMid = reduce22(socTop + socBot);
-  setEp('ep-soc-top', socTop, 'TL3+BR3');
-  setEp('ep-soc-bot', socBot, 'TR3+BL3');
-  setEp('ep-soc-mid', socMid, 'სულ');
+  setC('ep-misia', r22(soulMid+socMid));
 
-  // მისია: sum of all three mid circles
-  const misia = reduce22(soulMid + socMid);
-  setEp('ep-misia', misia, 'მისია');
-
-  // Chakra sum row
-  const sumE = [T3v,T2v,T1v,G2v,Cv,B1v,B3v].reduce((a,b)=>a+b,0);
-  const sumL = [L3v,L2v,L1v,G1v,Cv,R1v,R3v].reduce((a,b)=>a+b,0);
-  const sumS = ['c-s1','c-s2','c-s3','c-s4','c-s5','c-s6','c-s7']
-    .map(id=>{const e=document.getElementById(id);return e?parseInt(e.textContent)||0:0;})
-    .reduce((a,b)=>a+b,0);
-  const setId = (id,val)=>{const e=document.getElementById(id);if(e)e.textContent=val;};
-  setId('c-sum-e', sumE);
-  setId('c-sum-l', sumL);
-  setId('c-sum-s', sumS);
+  // ── Chakra sums — sum each column then reduce22 if > 22 ─────
+  const energyVals  = [T3v, T2v, T1v, G2v, Cv, B1v, B3v];
+  const matterVals  = [L3v, L2v, L1v, G1v, Cv, R1v, R3v];
+  const emotionVals = [
+    reduce22(T3v+L3v), reduce22(T2v+L2v), reduce22(T1v+L1v),
+    reduce22(G2v+G1v), reduce22(Cv+Cv),
+    reduce22(B1v+R1v), reduce22(B3v+R3v)
+  ];
+  // Sum each column, then reduce22 if result > 22
+  const sumCol = arr => { let s=arr.reduce((a,b)=>a+b,0); return s>22?reduce22(s):s; };
+  setC('c-sum-e', sumCol(energyVals));
+  setC('c-sum-l', sumCol(matterVals));
+  setC('c-sum-s', sumCol(emotionVals));
 
   // Build side table - 8 anchors + 8 sections x 7 dots = 65 rows with header
   const anchors = [
@@ -701,7 +611,7 @@ function draw(v) {
   }
 
   // SVG background
-  // page background used
+  
 
   // Subtle glow behind center
   const defs = el('defs',{});
@@ -712,10 +622,10 @@ function draw(v) {
   const s2 = document.createElementNS('http://www.w3.org/2000/svg','stop');
   s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','rgba(0,0,0,0)');
   rg.appendChild(s1); rg.appendChild(s2); defs.appendChild(rg);
-  // centerGlow circle removed
+  
 
   // Outer big circle
-  el('circle',{cx,cy,r:outerR,fill:'none',stroke:'rgba(180,160,255,0.95)','stroke-width':'2'});
+  el('circle',{cx,cy,r:outerR,fill:'none',stroke:'rgba(180,160,255,0.95)','stroke-width':'2.5'});
 
   // Rectangle: left side through L1 center, top through T1, bottom through B1, right through R3
   // Square: all 4 sides pass through 1st circles (d1) — L1, T1, B1, R1
@@ -739,9 +649,6 @@ function draw(v) {
   el('line',{x1:cx-dd1,y1:cy-dd1,x2:cx+dd1,y2:cy+dd1,stroke:'rgba(210,110,255,1.0)','stroke-width':'1.5'});
   el('text',{x:529,y:493,'font-size':13,'font-weight':600,fill:'rgba(200,130,255,0.95)','font-family':'Noto Sans Georgian,sans-serif','text-anchor':'middle',transform:'rotate(45,529,493)'},'მამაკაცის ხაზი');
 
-  // Purple rhombus — drawn before diagonal circles so circles paint over line crossings naturally
-  el('polygon',{points:`${cx},${cy-2*dd1} ${cx+2*dd1},${cy} ${cx},${cy+2*dd1} ${cx-2*dd1},${cy}`,fill:'none',stroke:'rgba(127,119,221,0.95)','stroke-width':'1.5'});
-
   // CENTER
   circle(cx,cy,rc_r,'#FFD700','#BA7517',1.5,v.Cv,true);
 
@@ -750,8 +657,8 @@ function draw(v) {
   circle(cx,cy-rc_r-gap/2,r1_r,'#639922','#3B6D11',1,v.G2v,true);
 
   // TOP
-  circle(cx,cy-d1,r1_r,'#5a9fd8','#2060a0',1,v.T1v,true);
-  circle(cx,cy-d2,r2_r,'#2878cc','#1050a0',1,v.T2v,true);
+  circle(cx,cy-d1,r1_r,'#4a8cc8','#1a5090',1,v.T1v,true);
+  circle(cx,cy-d2,r2_r,'#2060a8','#0a3878',1,v.T2v,true);
   circle(cx,cy-d3,r3_r,'#7F77DD','#534AB7',1,v.T3v,true);
 
   // BOTTOM
@@ -760,8 +667,8 @@ function draw(v) {
   circle(cx,cy+d3,r3_r,'#E24B4A','#A32D2D',1,v.B3v,true);
 
   // LEFT
-  circle(cx-d1,cy,r1_r,'#5a9fd8','#2060a0',1,v.L1v,true);
-  circle(cx-d2,cy,r2_r,'#2878cc','#1050a0',1,v.L2v,true);
+  circle(cx-d1,cy,r1_r,'#4a8cc8','#1a5090',1,v.L1v,true);
+  circle(cx-d2,cy,r2_r,'#2060a8','#0a3878',1,v.L2v,true);
   circle(cx-d3,cy,r3_r,'#7F77DD','#534AB7',1,v.L3v,true);
 
   // RIGHT
@@ -775,7 +682,7 @@ function draw(v) {
 
   // Diagonals
   const dc=(x,y,r,lbl)=>circle(x,y,r,'rgba(30,20,50,0.8)','rgba(220,200,255,0.95)',1.5,lbl,false);
-  // Purple rhombus — drawn before diagonal circles so circles cover the line crossings
+  // Purple rhombus - drawn before circles
   el('polygon',{points:`${cx},${cy-2*dd1} ${cx+2*dd1},${cy} ${cx},${cy+2*dd1} ${cx-2*dd1},${cy}`,fill:'none',stroke:'rgba(127,119,221,0.95)','stroke-width':'1.5'});
   dc(cx-dd1,cy-dd1,r1_r,v.TL1v); dc(cx-dd2,cy-dd2,r2_r,v.TL2v); dc(cx-dd3,cy-dd3,r3_r,v.TL3v);
   dc(cx+dd1,cy-dd1,r1_r,v.TR1v); dc(cx+dd2,cy-dd2,r2_r,v.TR2v); dc(cx+dd3,cy-dd3,r3_r,v.TR3v);
