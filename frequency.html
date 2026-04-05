@@ -1,136 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
 <meta charset="UTF-8">
-<title>სიხსირეების გენერატორი</title>
+<title>სიხშირეების გენერატორი</title>
+
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        color: white;
-        text-align: center;
-        padding: 40px;
-    }
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
 
-    h1 {
-        margin-bottom: 20px;
-    }
+.container {
+    max-width: 520px;
+    margin: auto;
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+}
 
-    .container {
-        max-width: 500px;
-        margin: auto;
-        background: rgba(255,255,255,0.1);
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
+/* Buttons */
+button {
+    margin: 6px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    color: black;
+}
 
-    button {
-        margin: 5px;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        background: #00c6ff;
-        color: black;
-        font-weight: bold;
-        transition: 0.2s;
-    }
+button:hover {
+    transform: scale(1.1);
+}
 
-    button:hover {
-        background: #0072ff;
-        color: white;
-    }
+/* Chakra Colors */
+.red { background: #ff4d4d; }
+.orange { background: #ff944d; }
+.yellow { background: #ffe066; }
+.green { background: #66ff99; }
+.lightblue { background: #66ccff; }
+.blue { background: #4d79ff; color:white; }
+.purple { background: #cc66ff; color:white; }
+.neutral { background: #cccccc; }
 
-    input, select {
-        margin: 10px;
-        padding: 8px;
-        border-radius: 8px;
-        border: none;
-        width: 80%;
-    }
+/* Active Playing Effect */
+.active {
+    box-shadow: 0 0 20px white;
+    transform: scale(1.15);
+}
 
-    .controls {
-        margin-top: 20px;
-    }
+/* Controls */
+input, select {
+    margin: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    width: 80%;
+}
+
+.controls {
+    margin-top: 20px;
+}
 </style>
 </head>
+
 <body>
 
-<h1>🎵 ხმოვანი სიხშირეები </h1>
+<h1>🎵 ხმოვანი სიხშირეები</h1>
 
 <div class="container">
 
-    <h3>ჩაკრების სიხშირეები </h3>
-    <div>
-        <button onclick="setFreq(396)">396</button>
-        <button onclick="setFreq(417)">417</button>
-        <button onclick="setFreq(528)">528</button>
-        <button onclick="setFreq(639)">639</button>
-        <button onclick="setFreq(714)">714</button>
-        <button onclick="setFreq(852)">852</button>
-        <button onclick="setFreq(963)">963</button>
-        <button onclick="setFreq(174)">174</button>
-        <button onclick="setFreq(285)">285</button>
-        <button onclick="setFreq(432)">432</button>
-    </div>
+<h3>ჩაკრების სიხშირეები</h3>
 
-    <div class="controls">
-        <h3>შეიყვანე სიხშირე</h3>
+<div id="buttons">
+    <button class="red" onclick="setFreq(396, this)">396</button>
+    <button class="orange" onclick="setFreq(417, this)">417</button>
+    <button class="yellow" onclick="setFreq(528, this)">528</button>
+    <button class="green" onclick="setFreq(639, this)">639</button>
+    <button class="lightblue" onclick="setFreq(741, this)">741</button>
+    <button class="blue" onclick="setFreq(852, this)">852</button>
+    <button class="purple" onclick="setFreq(963, this)">963</button>
+    <button class="neutral" onclick="setFreq(174, this)">174</button>
+    <button class="neutral" onclick="setFreq(285, this)">285</button>
+    <button class="neutral" onclick="setFreq(432, this)">432</button>
+</div>
 
-        <label>სიხშირე (Hz)</label><br>
-        <input type="number" id="freqInput" value="432" min="1" max="2000"><br>
+<div class="controls">
+    <h3>შეიყვანე სიხშირე</h3>
 
-        <label>ტალღა Type</label><br>
-        <select id="waveType">
-            <option value="sine">Sine</option>
-            <option value="square">Square</option>
-            <option value="triangle">Triangle</option>
-            <option value="sawtooth">Sawtooth</option>
-        </select><br>
+    <label>სიხშირე (Hz)</label><br>
+    <input type="number" id="freqInput" value="432"><br>
 
-        <label>ხმა</label><br>
-        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.2"><br>
+    <label>ტალღა</label><br>
+    <select id="waveType">
+        <option value="sine">Sine</option>
+        <option value="square">Square</option>
+        <option value="triangle">Triangle</option>
+        <option value="sawtooth">Sawtooth</option>
+    </select><br>
 
-        <button onclick="startTone()">▶ დაწყება</button>
-        <button onclick="stopTone()">⏹ პაუზა</button>
-    </div>
+    <label>ხმის დონე</label><br>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.2"><br>
+
+    <button onclick="startTone()">▶ დაწყება</button>
+    <button onclick="stopTone()">⏹ გაჩერება</button>
+</div>
 
 </div>
 
 <script>
-let audioCtx;
-let oscillator;
-let gainNode;
+let audioCtx = null;
+let oscillator = null;
+let gainNode = null;
+let currentButton = null;
 
-function setFreq(freq) {
+function setFreq(freq, btn) {
     document.getElementById("freqInput").value = freq;
+
     if (oscillator) {
         oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
     }
+
+    // Highlight active button
+    document.querySelectorAll("#buttons button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentButton = btn;
 }
 
 function startTone() {
-    if (audioCtx) return;
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        oscillator = audioCtx.createOscillator();
+        gainNode = audioCtx.createGain();
 
-    oscillator = audioCtx.createOscillator();
-    gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
 
-    const freq = document.getElementById("freqInput").value;
+        oscillator.start();
+    }
+
+    updateSound();
+}
+
+function updateSound() {
+    if (!oscillator) return;
+
+    const freq = parseFloat(document.getElementById("freqInput").value);
     const wave = document.getElementById("waveType").value;
-    const volume = document.getElementById("volume").value;
+    const volume = parseFloat(document.getElementById("volume").value);
 
-    oscillator.type = wave;
     oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
+    oscillator.type = wave;
     gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    oscillator.start();
 }
 
 function stopTone() {
@@ -139,8 +166,18 @@ function stopTone() {
     oscillator.stop();
     audioCtx.close();
 
+    oscillator = null;
     audioCtx = null;
+
+    // remove active glow
+    document.querySelectorAll("#buttons button").forEach(b => b.classList.remove("active"));
 }
+
+/* REAL-TIME CONTROL FIX */
+document.getElementById("volume").addEventListener("input", updateSound);
+document.getElementById("freqInput").addEventListener("input", updateSound);
+document.getElementById("waveType").addEventListener("change", updateSound);
+
 </script>
 
 </body>
