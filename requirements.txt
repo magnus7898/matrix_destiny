@@ -1,5 +1,5 @@
 Flask
-swisseph>=2.10.3
+swisseph
 geopy
 timezonefinder
 pytz
