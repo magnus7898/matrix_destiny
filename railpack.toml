@@ -1,2 +1,2 @@
 [build]
-nixpkgs = ["gcc", "gnumake", "pkg-config"]
+nixpkgs = ["gcc", "gnumake", "pkg-config", "sqlite"]
