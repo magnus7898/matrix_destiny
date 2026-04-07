@@ -1,2 +1,2 @@
 [build]
-nixpkgs = ["gcc", "glibc", "gnumake", "autoconf", "automake", "libtool", "pkg-config"]
+nixpkgs = ["gcc", "gnumake", "pkg-config"]
