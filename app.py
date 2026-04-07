@@ -204,6 +204,45 @@ def chart():
     for name in planets:
         planets[name]['house'] = get_house(planets[name]['degree'], cusps)
 
+    # ── ASPECTS ────────────────────────────────────────────
+    ASPECT_DEFS = [
+        {'angle': 0,   'orb': 8.0, 'name': 'Conjunction',    'sym': '☌', 'color': '#e8c84a'},
+        {'angle': 180, 'orb': 8.0, 'name': 'Opposition',     'sym': '☍', 'color': '#e05555'},
+        {'angle': 120, 'orb': 7.0, 'name': 'Trine',          'sym': '△', 'color': '#4ab8e8'},
+        {'angle': 90,  'orb': 7.0, 'name': 'Square',         'sym': '□', 'color': '#e07840'},
+        {'angle': 60,  'orb': 5.0, 'name': 'Sextile',        'sym': '✱', 'color': '#6abf6a'},
+        {'angle': 150, 'orb': 3.0, 'name': 'Quincunx',       'sym': '⚻', 'color': '#a070c0'},
+        {'angle': 45,  'orb': 2.0, 'name': 'Semi-square',    'sym': '∠', 'color': '#c09050'},
+        {'angle': 135, 'orb': 2.0, 'name': 'Sesquiquadrate', 'sym': '⚼', 'color': '#c07050'},
+    ]
+
+    planet_names = list(planets.keys())
+    aspects = []
+
+    for i in range(len(planet_names)):
+        for j in range(i + 1, len(planet_names)):
+            p1_name = planet_names[i]
+            p2_name = planet_names[j]
+            deg1 = planets[p1_name]['degree']
+            deg2 = planets[p2_name]['degree']
+
+            diff = abs(deg1 - deg2) % 360
+            if diff > 180:
+                diff = 360 - diff
+
+            for asp in ASPECT_DEFS:
+                orb = abs(diff - asp['angle'])
+                if orb <= asp['orb']:
+                    aspects.append({
+                        'p1':    p1_name,
+                        'p2':    p2_name,
+                        'sym':   asp['sym'],
+                        'type':  asp['name'],
+                        'color': asp['color'],
+                        'orb':   round(orb, 2)
+                    })
+                    break  # one aspect per pair (tightest match wins)
+
     return jsonify({
         'planets': planets,
         'houses': [round(c, 4) for c in cusps],
@@ -213,7 +252,8 @@ def chart():
         'mc_sign': get_zodiac(mc),
         'lat': lat,
         'lon': lon,
-        'tz_name': tz_name
+        'tz_name': tz_name,
+        'aspects': aspects
     })
 
 # ── RUN (RAILWAY) ─────────────────────────────────────────
